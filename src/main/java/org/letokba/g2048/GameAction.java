@@ -1,11 +1,11 @@
 package org.letokba.g2048;
 
+
 /**
  * @author Yong
  * @date 2020/12/29
  */
 public class GameAction {
-
 
     public void moveLeft(GameCore gameCore) {
         gameCore.clearZeros()

@@ -83,7 +83,7 @@ public class GameCore {
     }
 
     public GameCore vFlip() {
-        return this.transpose().hFlip();
+        return this.transpose().hFlip().transpose();
     }
 
 
