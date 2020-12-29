@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import org.letokba.g2048.GameCore.SquareMatrix;
 public class GameCoreTest {
     private int[] array = {
             2, 2, 2, 2,
@@ -15,18 +14,18 @@ public class GameCoreTest {
     };
 
     private GameCore gameCore = new GameCore();
-    private SquareMatrix matrix;
 
     @Before
     public void setUp() throws Exception {
-        matrix = new SquareMatrix(array);
+        gameCore.of(array);
     }
 
     @After
     public void tearDown() throws Exception {
-        for (int i = 0; i < matrix.row(); i++) {
-            for (int j = 0; j < matrix.col(); j++) {
-                System.out.print(matrix.get(i, j) + "\t");
+        int[] matrix = gameCore.toArray();
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                System.out.print(matrix[i * 4 + j] + "\t");
             }
             System.out.println();
         }
@@ -40,26 +39,28 @@ public class GameCoreTest {
 
     @Test
     public void transpose() {
-        gameCore.transpose(matrix);
+        gameCore.transpose();
     }
 
     @Test
     public void hFlip() {
-        gameCore.hFlip(matrix);
+        gameCore.hFlip();
     }
 
     @Test
     public void vFlip() {
-        gameCore.vFlip(matrix);
+        gameCore.vFlip();
     }
 
     @Test
     public void clearZeros() {
-        gameCore.clearZeros(matrix);
+        gameCore.clearZeros();
     }
 
     @Test
     public void mergeSame() {
-        gameCore.mergeSame(matrix);
+        gameCore.mergeSame();
     }
+
+
 }

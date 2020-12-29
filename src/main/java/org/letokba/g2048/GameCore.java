@@ -7,10 +7,17 @@ import java.util.Arrays;
  * @date 2020/12/29
  */
 public class GameCore {
+    private SquareMatrix matrix;
 
+    public void of(int[] array) {
+        this.matrix = new SquareMatrix(array);
+    }
 
+    public int[] toArray() {
+        return matrix.array;
+    }
 
-    public static class SquareMatrix {
+    private static class SquareMatrix {
         private static final int SIZE = 4;
         private final int[] array;
 
@@ -52,7 +59,7 @@ public class GameCore {
 
     }
 
-    public GameCore transpose(SquareMatrix matrix) {
+    public GameCore transpose() {
         for(int i = 0; i < matrix.row(); i++) {
             for(int j = i + 1; j < matrix.col(); j++) {
                 int k = matrix.get(i, j);
@@ -63,7 +70,7 @@ public class GameCore {
         return this;
     }
 
-    public GameCore hFlip(SquareMatrix matrix) {
+    public GameCore hFlip() {
         int col = matrix.col();
         for(int i = 0; i < matrix.row(); i++) {
             for(int j = 0; j < matrix.col() / 2; j++) {
@@ -75,13 +82,13 @@ public class GameCore {
         return this;
     }
 
-    public GameCore vFlip(SquareMatrix matrix) {
-        return this.transpose(matrix).hFlip(matrix);
+    public GameCore vFlip() {
+        return this.transpose().hFlip();
     }
 
 
 
-    public GameCore clearZeros(SquareMatrix matrix) {
+    public GameCore clearZeros() {
         int[] cap = new int[matrix.col()];
         for(int i = 0; i < matrix.row(); i++) {
             int k = 0;
@@ -96,7 +103,7 @@ public class GameCore {
         return this;
     }
 
-    public GameCore mergeSame(SquareMatrix matrix) {
+    public GameCore mergeSame() {
         for(int i = 0; i < matrix.row(); i++) {
             for(int j = 0; j < matrix.col() - 1; j++) {
                 int pre = matrix.get(i, j);
@@ -110,6 +117,7 @@ public class GameCore {
         }
         return this;
     }
+
 
 
 
