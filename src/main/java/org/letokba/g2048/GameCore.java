@@ -10,11 +10,11 @@ public class GameCore {
 
 
 
-    private static class SquareMatrix {
+    public static class SquareMatrix {
         private static final int SIZE = 4;
         private final int[] array;
 
-        private SquareMatrix(int[] array){
+        public SquareMatrix(int[] array){
             this.array = array;
         }
 
@@ -28,7 +28,7 @@ public class GameCore {
 
         private int index(int i, int j) {
             int k = i * SIZE + j;
-            if(k > array.length) {
+            if(k >= array.length) {
                 throw new ArrayIndexOutOfBoundsException("i = " + i + ", j = " + j);
             }
             return i * SIZE + j;
@@ -41,7 +41,7 @@ public class GameCore {
         public int row() {
             return SIZE;
         }
-        private int col() {
+        public int col() {
             return SIZE;
         }
 
@@ -49,41 +49,42 @@ public class GameCore {
             System.arraycopy(array, 0, this.array, row * SIZE, SIZE);
         }
 
+
     }
 
-    private GameCore transpose(SquareMatrix matrix) {
+    public GameCore transpose(SquareMatrix matrix) {
         for(int i = 0; i < matrix.row(); i++) {
             for(int j = i + 1; j < matrix.col(); j++) {
                 int k = matrix.get(i, j);
-                matrix.set(j, i, matrix.get(i, j));
-                matrix.set(i, j, k);
+                matrix.set(i, j, matrix.get(j, i));
+                matrix.set(j, i, k);
             }
         }
         return this;
     }
 
-    private GameCore hFlip(SquareMatrix matrix) {
+    public GameCore hFlip(SquareMatrix matrix) {
         int col = matrix.col();
         for(int i = 0; i < matrix.row(); i++) {
             for(int j = 0; j < matrix.col() / 2; j++) {
                 int k = matrix.get(i, j);
-                matrix.set(i, j, matrix.get(i, col - j));
-                matrix.set(i, col - j, k);
+                matrix.set(i, j, matrix.get(i, col - j - 1));
+                matrix.set(i, col - j - 1, k);
             }
         }
         return this;
     }
 
-    private GameCore vFlip(SquareMatrix matrix) {
+    public GameCore vFlip(SquareMatrix matrix) {
         return this.transpose(matrix).hFlip(matrix);
     }
 
 
 
-    private GameCore clearZeros(SquareMatrix matrix) {
+    public GameCore clearZeros(SquareMatrix matrix) {
         int[] cap = new int[matrix.col()];
-        int k = 0;
         for(int i = 0; i < matrix.row(); i++) {
+            int k = 0;
             for(int j = 0; j < matrix.col(); j++) {
                 if(matrix.isNotZero(i, j)){
                     cap[k++] = matrix.get(i, j);
@@ -95,7 +96,7 @@ public class GameCore {
         return this;
     }
 
-    private GameCore mergeSame(SquareMatrix matrix) {
+    public GameCore mergeSame(SquareMatrix matrix) {
         for(int i = 0; i < matrix.row(); i++) {
             for(int j = 0; j < matrix.col() - 1; j++) {
                 int pre = matrix.get(i, j);
