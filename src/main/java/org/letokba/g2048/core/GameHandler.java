@@ -1,8 +1,5 @@
 package org.letokba.g2048.core;
 
-import org.letokba.g2048.core.GameAction;
-import org.letokba.g2048.core.GameCore;
-
 /**
  * @author Yong
  * @date 2020/12/29

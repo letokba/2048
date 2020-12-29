@@ -2,6 +2,8 @@ package org.letokba.g2048.api;
 
 import jdk.nashorn.internal.objects.annotations.Property;
 
+import java.util.Arrays;
+
 /**
  * @author Yong
  * @date 2020/12/29
@@ -26,5 +28,13 @@ public class GameEntity {
 
     public String getDirection() {
         return direction;
+    }
+
+    @Override
+    public String toString() {
+        return "GameEntity{" +
+                "direction='" + direction + '\'' +
+                ", matrix=" + Arrays.toString(matrix) +
+                '}';
     }
 }
