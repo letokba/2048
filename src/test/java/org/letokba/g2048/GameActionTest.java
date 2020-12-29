@@ -17,12 +17,12 @@ public class GameActionTest {
 
     @Before
     public void setUp() {
-        TestUtils.printArray(array);
         gameCore.of(array);
     }
 
     @After
     public void tearDown() {
+        TestUtils.printArray(array);
         TestUtils.printArray(gameCore.toArray());
     }
 

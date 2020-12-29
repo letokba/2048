@@ -46,5 +46,7 @@ public class GameHandler {
         return move(array, moveAction);
     }
 
-
+    public boolean isGameOver(int[] array) {
+        return gameCore.hasNotChanged(array);
+    }
 }

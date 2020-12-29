@@ -12,12 +12,12 @@ public class GameCoreTest {
 
     @Before
     public void setUp() throws Exception {
-        TestUtils.printArray(array);
         gameCore.of(array);
     }
 
     @After
     public void tearDown() throws Exception {
+        TestUtils.printArray(array);
         int[] result = gameCore.toArray();
         TestUtils.printArray(result);
     }

@@ -1,16 +1,22 @@
 package org.letokba.g2048.core;
 
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * @author Wait
  * @date 2020/12/29
  */
 public class GameCore {
-    private SquareMatrix matrix;
+    private final SquareMatrix matrix;
+    private final Random random = new Random();
+
+    public GameCore() {
+        matrix = new SquareMatrix(new int[16]);
+    }
 
     public void of(int[] array) {
-        this.matrix = new SquareMatrix(array);
+        this.matrix.load(array);
     }
 
     public int[] toArray() {
@@ -23,6 +29,10 @@ public class GameCore {
 
         public SquareMatrix(int[] array){
             this.array = array;
+        }
+
+        public void load(int[] array) {
+            System.arraycopy(array, 0, this.array, 0, array.length);
         }
 
         public int get(int i, int j) {
@@ -57,6 +67,22 @@ public class GameCore {
         }
 
 
+        @Override
+        public boolean equals(Object o) {
+            if (this == o){
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()){
+                return false;
+            }
+            SquareMatrix that = (SquareMatrix) o;
+            return Arrays.equals(array, that.array);
+        }
+
+        @Override
+        public int hashCode() {
+            return Arrays.hashCode(array);
+        }
     }
 
     public GameCore transpose() {
@@ -120,14 +146,18 @@ public class GameCore {
         return this;
     }
 
+    public GameCore randomAdd() {
+        int i = 0, j = 0;
+        while (!matrix.isNotZero(i, j)) {
+            i = random.nextInt(matrix.row());
+            j = random.nextInt(matrix.col());
+        }
+        int value = random.nextInt(2) * 2 + 2;
+        matrix.set(i, j, value);
+        return this;
+    }
 
-
-
-
-
-
-
-
-
-
+    public boolean hasNotChanged(int[] array) {
+        return Arrays.equals(array, matrix.array);
+    }
 }

@@ -14,6 +14,8 @@ public class GameEntity {
     @Property(name = "matrix")
     private int[] matrix;
 
+    private boolean isGameOver;
+
     public void setArray(int[] array) {
         this.matrix = array;
     }
@@ -28,6 +30,14 @@ public class GameEntity {
 
     public String getDirection() {
         return direction;
+    }
+
+    public boolean isGameOver() {
+        return isGameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        isGameOver = gameOver;
     }
 
     @Override

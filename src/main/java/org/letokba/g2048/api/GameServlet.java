@@ -31,6 +31,7 @@ public class GameServlet extends HttpServlet {
         GameEntity entity = mapper.readValue(request.getInputStream(), GameEntity.class);
         int[] array = handler.move(entity.getMatrix(), entity.getDirection());
         entity.setArray(array);
+        entity.setGameOver(handler.isGameOver(array));
         mapper.writeValue(response.getOutputStream(), entity);
 
         System.out.println(entity.getDirection());
