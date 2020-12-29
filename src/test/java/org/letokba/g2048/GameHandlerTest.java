@@ -5,14 +5,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-public class GameCoreTest {
-    private final int[] array = RandomUtils.randomArray();
 
-    private GameCore gameCore = new GameCore();
+public class GameHandlerTest {
+    private final int[] array = RandomUtils.randomArray();
+    private final GameHandler handler = new GameHandler();
+    private int[] result;
 
     @Before
     public void setUp() throws Exception {
-        gameCore.of(array);
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 System.out.print(array[i * 4 + j] + "\t");
@@ -24,10 +24,9 @@ public class GameCoreTest {
 
     @After
     public void tearDown() throws Exception {
-        int[] matrix = gameCore.toArray();
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                System.out.print(matrix[i * 4 + j] + "\t");
+                System.out.print(result[i * 4 + j] + "\t");
             }
             System.out.println();
         }
@@ -35,29 +34,22 @@ public class GameCoreTest {
     }
 
     @Test
-    public void transpose() {
-        gameCore.transpose();
+    public void Right() {
+        result  = handler.move(array, "Right");
     }
 
     @Test
-    public void hFlip() {
-        gameCore.hFlip();
+    public void Left() {
+        result = handler.move(array, "LEFT");
     }
 
     @Test
-    public void vFlip() {
-        gameCore.vFlip();
+    public void Up() {
+        result = handler.move(array, "UP");
     }
 
     @Test
-    public void clearZeros() {
-        gameCore.clearZeros();
+    public void Down() {
+        result = handler.move(array, "down");
     }
-
-    @Test
-    public void mergeSame() {
-        gameCore.mergeSame();
-    }
-
-
 }

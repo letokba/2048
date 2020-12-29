@@ -86,7 +86,9 @@ public class GameCore {
         return this.transpose().hFlip().transpose();
     }
 
-
+    public GameCore merge() {
+        return this.clearZeros().mergeSame().clearZeros();
+    }
 
     public GameCore clearZeros() {
         int[] cap = new int[matrix.col()];

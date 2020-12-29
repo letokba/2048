@@ -8,12 +8,8 @@ import static org.junit.Assert.*;
 
 public class GameActionTest {
 
-    private int[] array = {
-            2, 2, 2, 2,
-            2, 0, 2, 2,
-            0, 0, 2, 4,
-            0, 0, 2, 2
-    };
+    private final int[] array = RandomUtils.randomArray();
+
 
     private GameCore gameCore = new GameCore();
     private GameAction gameAction = new GameAction();
