@@ -1,5 +1,7 @@
-package org.letokba.g2048;
+package org.letokba.g2048.core;
 
+
+import org.letokba.g2048.core.GameCore;
 
 /**
  * @author Yong

@@ -3,35 +3,23 @@ package org.letokba.g2048;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
+import org.letokba.g2048.core.GameHandler;
 
 public class GameHandlerTest {
-    private final int[] array = RandomUtils.randomArray();
+    private final int[] array = TestUtils.randomArray();
     private final GameHandler handler = new GameHandler();
     private int[] result;
 
     @Before
     public void setUp() throws Exception {
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                System.out.print(array[i * 4 + j] + "\t");
-            }
-            System.out.println();
-        }
-        System.out.println();
+        TestUtils.printArray(array);
     }
 
     @After
     public void tearDown() throws Exception {
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                System.out.print(result[i * 4 + j] + "\t");
-            }
-            System.out.println();
-        }
-        System.out.println();
+        TestUtils.printArray(result);
     }
+
 
     @Test
     public void Right() {
@@ -52,4 +40,6 @@ public class GameHandlerTest {
     public void Down() {
         result = handler.move(array, "down");
     }
+
+
 }

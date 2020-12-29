@@ -3,38 +3,27 @@ package org.letokba.g2048;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.letokba.g2048.core.GameAction;
+import org.letokba.g2048.core.GameCore;
 
-import static org.junit.Assert.*;
 
 public class GameActionTest {
 
-    private final int[] array = RandomUtils.randomArray();
+    private final int[] array = TestUtils.randomArray();
 
 
-    private GameCore gameCore = new GameCore();
-    private GameAction gameAction = new GameAction();
+    private final GameCore gameCore = new GameCore();
+    private final GameAction gameAction = new GameAction();
+
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
+        TestUtils.printArray(array);
         gameCore.of(array);
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                System.out.print(array[i * 4 + j] + "\t");
-            }
-            System.out.println();
-        }
-        System.out.println();
     }
 
     @After
-    public void tearDown() throws Exception {
-        int[] matrix = gameCore.toArray();
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                System.out.print(matrix[i * 4 + j] + "\t");
-            }
-            System.out.println();
-        }
-        System.out.println();
+    public void tearDown() {
+        TestUtils.printArray(gameCore.toArray());
     }
 
     @Test

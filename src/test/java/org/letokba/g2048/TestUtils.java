@@ -6,7 +6,7 @@ import java.util.Random;
  * @author Yong
  * @date 2020/12/29
  */
-public class RandomUtils {
+public class TestUtils {
 
     private static final Random random = new Random();
 
@@ -16,5 +16,15 @@ public class RandomUtils {
             array[i] = random.nextInt(3) * 2;
         }
         return array;
+    }
+
+    public static void printArray(int[] array) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                System.out.print(array[i * 4 + j] + "\t");
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 }

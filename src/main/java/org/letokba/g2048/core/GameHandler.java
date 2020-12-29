@@ -1,6 +1,7 @@
-package org.letokba.g2048;
+package org.letokba.g2048.core;
 
-import java.util.Arrays;
+import org.letokba.g2048.core.GameAction;
+import org.letokba.g2048.core.GameCore;
 
 /**
  * @author Yong
@@ -20,7 +21,7 @@ public class GameHandler {
         UP, DOWN, LEFT, RIGHT
     }
 
-    public int[] move(int[] array, Action action) {
+    private int[] move(int[] array, Action action) {
         gameCore.of(array);
         switch (action) {
             case UP:
@@ -43,8 +44,8 @@ public class GameHandler {
     public int[] move(int[] array, String direction) {
         assert direction != null;
         assert array != null && array.length == 16;
-
-        Action moveAction = Action.valueOf(direction.toUpperCase());
+        Action moveAction;
+        moveAction = Action.valueOf(direction.toUpperCase());
         return move(array, moveAction);
     }
 
