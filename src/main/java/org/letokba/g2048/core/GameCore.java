@@ -66,15 +66,15 @@ public class GameCore {
             System.arraycopy(array, 0, this.array, row * SIZE, SIZE);
         }
 
-        public boolean allZeros() {
-            boolean allZeros = true;
+        public boolean hasZero() {
+            boolean hasZero = false;
             for (int i : array) {
-                if(i != 0) {
-                    allZeros = false;
+                if(i == 0) {
+                    hasZero = true;
                     break;
                 }
             }
-            return allZeros;
+            return hasZero;
         }
 
         @Override
@@ -157,7 +157,7 @@ public class GameCore {
     }
 
     public GameCore randomAdd() {
-        if(matrix.allZeros()){
+        if(! matrix.hasZero()){
             return this;
         }
 

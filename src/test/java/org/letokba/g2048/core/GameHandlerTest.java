@@ -1,9 +1,8 @@
-package org.letokba.g2048;
+package org.letokba.g2048.core;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.letokba.g2048.core.GameHandler;
 
 public class GameHandlerTest {
     private final int[] array = TestUtils.randomArray();

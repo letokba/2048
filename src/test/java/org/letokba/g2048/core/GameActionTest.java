@@ -1,10 +1,8 @@
-package org.letokba.g2048;
+package org.letokba.g2048.core;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.letokba.g2048.core.GameAction;
-import org.letokba.g2048.core.GameCore;
 
 
 public class GameActionTest {
@@ -26,10 +24,7 @@ public class GameActionTest {
         TestUtils.printArray(gameCore.toArray());
     }
 
-    @Test
-    public void init() {
 
-    }
 
     @Test
     public void moveLeft() {

@@ -1,4 +1,4 @@
-package org.letokba.g2048;
+package org.letokba.g2048.core;
 
 import java.util.Random;
 
