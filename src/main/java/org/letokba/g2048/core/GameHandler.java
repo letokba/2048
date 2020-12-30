@@ -35,7 +35,7 @@ public class GameHandler {
             default:
                 break;
         }
-        return gameCore.toArray();
+        return gameCore.randomAdd().toArray();
     }
 
     public int[] move(int[] array, String direction) {

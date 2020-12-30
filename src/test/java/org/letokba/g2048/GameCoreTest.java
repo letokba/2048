@@ -47,5 +47,9 @@ public class GameCoreTest {
         gameCore.mergeSame();
     }
 
+    @Test
+    public void randomAdd() {
+        gameCore.randomAdd();
+    }
 
 }

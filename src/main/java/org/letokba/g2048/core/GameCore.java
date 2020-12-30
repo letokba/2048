@@ -66,6 +66,16 @@ public class GameCore {
             System.arraycopy(array, 0, this.array, row * SIZE, SIZE);
         }
 
+        public boolean allZeros() {
+            boolean allZeros = true;
+            for (int i : array) {
+                if(i != 0) {
+                    allZeros = false;
+                    break;
+                }
+            }
+            return allZeros;
+        }
 
         @Override
         public boolean equals(Object o) {
@@ -147,11 +157,15 @@ public class GameCore {
     }
 
     public GameCore randomAdd() {
-        int i = 0, j = 0;
-        while (!matrix.isNotZero(i, j)) {
+        if(matrix.allZeros()){
+            return this;
+        }
+
+        int i, j;
+        do {
             i = random.nextInt(matrix.row());
             j = random.nextInt(matrix.col());
-        }
+        }while (matrix.isNotZero(i, j));
         int value = random.nextInt(2) * 2 + 2;
         matrix.set(i, j, value);
         return this;
