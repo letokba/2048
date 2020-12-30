@@ -16,7 +16,7 @@ public class GameEntity {
 
     private boolean isGameOver;
 
-    public void setArray(int[] array) {
+    public void setMatrix(int[] array) {
         this.matrix = array;
     }
 
