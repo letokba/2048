@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html >
 <head>
     <title>$Title$</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -19,7 +19,10 @@
             height: 60px;
             margin: 15px;
             background-color: pink;
+            border-radius: 5px;
             font-size: 20px;
+            font-weight: bold;
+            color: #404040;
             float: left;
             text-align: center;
             line-height: 60px;
@@ -41,31 +44,46 @@
 
 <div id="app">
     <div class="cap">
-        <div class="cell" v-for="item in matrix"> {{ item }}</div>
+        <div class="cell" v-for="item in matrix" :style="{backgroundColor: selectColor(item)}"> {{ item }}</div>
     </div>
 </div>
 
 
 
 <script>
+    const colorSet = [
+        '#dadada',
+        '#f6dbd0',
+        '#e7c1ce',
+        '#89e2ce',
+        '#d2e4a8',
+        '#ffde96',
+        '#fe8a7d',
+        '#ceaada',
+        '#aac9ce',
+        '#f2a7be',
+        '#4889a5',
+        '#df5a6f',
 
+    ]
 
     const vm = new Vue({
         el: '#app',
         data: {
             message: 'hello world',
             gameOver: false,
+            color: '#df5a6f',
             initCount: 2,
             matrix: [
-                0, 0, 0, 0,
-                0, 0, 0, 0,
-                0, 0, 0, 0,
+                0, 2, 4, 8,
+                16, 32, 64, 128,
+                256, 512, 1024, 2048,
                 0, 0, 0, 0,
             ]
         },
 
         created: function (){
-          this.randomMatrix();
+            this.randomMatrix();
         },
 
         watch: {
@@ -96,12 +114,25 @@
             },
 
             randomMatrix: function () {
-                let matrix = new Array(10).fill(0);
+                let matrix = new Array(16).fill(0);
                 for(let i = 0; i < this.initCount; i++) {
                     let index = Math.floor(Math.random() * (matrix.length - 1));
                     matrix[index] = Math.floor(Math.random() * 2) * 2;
                 }
                 this.matrix = matrix;
+            },
+
+            /**
+             *
+             * @param num {Number}
+             * @returns {string}
+             */
+            selectColor: function (num) {
+                let index = Math.floor(Math.log2(num));
+                if(index < 0 || index >= colorSet.length) {
+                    index = 0;
+                }
+                return colorSet[index];
             }
         },
 
@@ -116,7 +147,6 @@
             case 'ArrowRight': vm.httpRequest('right'); break;
             default: break;
         }
-
     })
 
 </script>

@@ -3,8 +3,6 @@ package org.letokba.g2048.api;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.letokba.g2048.core.GameAction;
-import org.letokba.g2048.core.GameCore;
 import org.letokba.g2048.core.GameHandler;
 import org.letokba.g2048.core.TestUtils;
 
@@ -38,5 +36,6 @@ public class GameServletTest {
     public void gameOver() {
         result = handler.move(array, "left");
     }
+
 
 }

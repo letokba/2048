@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+    <title>$Title$</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -13,7 +12,10 @@
             height: 60px;
             margin: 15px;
             background-color: pink;
+            border-radius: 5px;
             font-size: 20px;
+            font-weight: bold;
+            color: #404040;
             float: left;
             text-align: center;
             line-height: 60px;
@@ -35,42 +37,58 @@
 
 <div id="app">
     <div class="cap">
-        <div class="cell" v-for="item in matrix"> {{ item }}</div>
+        <div class="cell" v-for="item in matrix" :style="{backgroundColor: selectColor(item)}"> {{ item }}</div>
     </div>
 </div>
 
 
 
 <script>
-    document.addEventListener('keyup', function (event) {
-        let key = event.key;
-        switch (key) {
-            case 'AllowUp': vm.httpRequest('up'); break;
-            case 'AllowDown': vm.httpRequest('down'); break;
-            case 'AllowLeft': vm.httpRequest('left'); break;
-            case 'AllowRight': vm.httpRequest('right'); break;
-            default: break;
-        }
-    })
+    const colorSet = [
+        '#dadada',
+        '#f6dbd0',
+        '#e7c1ce',
+        '#89e2ce',
+        '#d2e4a8',
+        '#ffde96',
+        '#fe8a7d',
+        '#ceaada',
+        '#aac9ce',
+        '#f2a7be',
+        '#4889a5',
+        '#df5a6f',
+
+    ]
 
     const vm = new Vue({
         el: '#app',
         data: {
             message: 'hello world',
+            gameOver: false,
+            color: '#df5a6f',
+            initCount: 2,
             matrix: [
-                2, 0, 4, 4,
-                0, 2, 4, 0,
-                0, 0, 4, 0,
-                0, 2, 2, 0
+                0, 2, 4, 8,
+                16, 32, 64, 128,
+                256, 512, 1024, 2048,
+                0, 0, 0, 0,
             ]
         },
 
+        created: function (){
+            // this.randomMatrix();
+        },
+
+        watch: {
+            gameOver: function (newVal) {
+                if(newVal) {
+                    alert("游戏结束");
+                    this.randomMatrix();
+                }
+            }
+        },
+
         methods: {
-
-            move: function () {
-                console.log('move');
-            },
-
             httpRequest: function (direction) {
                 let that = this;
                 let body = {
@@ -84,12 +102,47 @@
                     data: body,
                 }).then(function (response) {
                     that.matrix = response.data.matrix;
+                    that.gameOver = response.data.gameOver;
                 })
             },
-        }
+
+            randomMatrix: function () {
+                let matrix = new Array(16).fill(0);
+                for(let i = 0; i < this.initCount; i++) {
+                    let index = Math.floor(Math.random() * (matrix.length - 1));
+                    matrix[index] = Math.floor(Math.random() * 2) * 2;
+                }
+                this.matrix = matrix;
+            },
+
+            /**
+             *
+             * @param num {Number}
+             * @returns {string}
+             */
+            selectColor: function (num) {
+                let index = Math.floor(Math.log2(num));
+                if(index < 0 || index >= colorSet.length) {
+                    index = 0;
+                }
+                return colorSet[index];
+            }
+        },
+
     });
 
+    document.addEventListener('keyup', function (event) {
+        let key = event.key;
+        switch (key) {
+            case 'ArrowUp': vm.httpRequest('up'); break;
+            case 'ArrowDown': vm.httpRequest('down'); break;
+            case 'ArrowLeft': vm.httpRequest('left'); break;
+            case 'ArrowRight': vm.httpRequest('right'); break;
+            default: break;
+        }
+    })
 
 </script>
+
 </body>
 </html>

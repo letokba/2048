@@ -41,4 +41,5 @@ public class GameServlet extends HttpServlet {
             throws ServletException, IOException {
         doGet(req, resp);
     }
+
 }
